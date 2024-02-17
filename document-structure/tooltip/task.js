@@ -13,12 +13,10 @@ const tooltipsActive = document.querySelectorAll(".tooltip");
 hasTooltips.forEach((hasTooltip) => {
   hasTooltip.addEventListener("click", function (e) {
     e.preventDefault();
-    tooltipsActive.forEach((tooltipActive) => {
-      tooltipActive.classList.remove("tooltip_active");
-    });
+
     const { top, left } = this.getBoundingClientRect();
-    this.nextSibling.classList.add("tooltip_active");
-    
+    this.nextSibling.classList.toggle("tooltip_active");
+
     this.nextSibling.setAttribute(
       "style",
       `left: ${left}px; top: ${top + 20}px`
