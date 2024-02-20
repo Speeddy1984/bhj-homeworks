@@ -8,7 +8,7 @@ tasksForm.addEventListener("submit", function (e) {
 
   if (taskTitle === "") {
     return;
-  } else {
+  } 
     const taskItem = document.createElement("div");
     taskItem.classList.add("task");
 
@@ -27,7 +27,7 @@ tasksForm.addEventListener("submit", function (e) {
     tasksList.appendChild(taskItem);
 
     tasksInput.value = "";
-  }
+  
 });
 
 // tasksForm.addEventListener("submit", function (e) {
