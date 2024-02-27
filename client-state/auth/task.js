@@ -4,6 +4,12 @@ const signin = document.getElementById("signin");
 const welcome = document.getElementById("welcome");
 const userId = document.getElementById("user_id");
 
+if (localStorage.getItem("user_id")) {
+  signin.classList.remove("signin_active");
+  welcome.classList.add("welcome_active");
+  userId.textContent = localStorage.getItem("user_id");
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -18,17 +24,17 @@ form.addEventListener("submit", (e) => {
   xhr.send(formData);
 
   xhr.onload = function () {
-    if (xhr.readyState === 4) {
-      const response = xhr.response;
+    const response = xhr.response;
 
-      if (!response.success) {
-        alert("Неверный логин/пароль");
-      } else {
-        localStorage.setItem("user_id", response.user_id);
-        signin.classList.remove("signin_active");
-        welcome.classList.add("welcome_active");
-        userId.textContent = localStorage.getItem("user_id");
-      }
+    if (!response.success) {
+      alert("Неверный логин/пароль");
+      form.reset();
+    } else {
+      localStorage.setItem("user_id", response.user_id);
+      signin.classList.remove("signin_active");
+      welcome.classList.add("welcome_active");
+      userId.textContent = localStorage.getItem("user_id");
+      form.reset();
     }
   };
 });
